@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ประวัติส่วนตัวและการทำงาน</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <!-- Google Fonts (Sarabun) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-green: #143625;   /* เขียวเข้ม สุขุม เป็นมืออาชีพ */
+            --mid-green: #205036;    /* เขียวกลาง สำหรับน้ำหนักรอง */
+            --light-green: #4AA96C;  /* เขียวอ่อน ไฮไลท์และปุ่ม */
+            --soft-bg: #F4F7F5;      /* พื้นหลังขาวอมเขียวอ่อนๆ สบายตา */
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--soft-bg);
+            color: #333333;
+        }
+
+        /* Navbar Customization */
+        .navbar {
+            background-color: var(--dark-green) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand, .nav-link {
+            color: var(--white) !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--light-green) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--mid-green) 100%);
+            color: var(--white);
+            padding: 100px 0;
+            border-bottom-right-radius: 60px;
+        }
+        .hero-title {
+            font-weight: 700;
+            font-size: 2.8rem;
+        }
+        .hero-subtitle {
+            font-weight: 400;
+            color: #C1E1C1;
+        }
+        .btn-custom-light {
+            background-color: var(--light-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-light:hover {
+            background-color: #3e8e58;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .btn-custom-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 8px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-outline:hover {
+            background-color: var(--white);
+            color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* Profile Image Shadow Ring */
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 4px solid var(--light-green);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        /* Section Styling */
+        .section-title {
+            color: var(--dark-green);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 12px;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--light-green);
+            border-radius: 2px;
+        }
+
+        /* Card Styling */
+        .custom-card {
+            background: var(--white);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(74, 169, 108, 0.1);
+            color: var(--light-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Skill Badges */
+        .skill-badge {
+            background-color: var(--white);
+            color: var(--dark-green);
+            border: 1px solid rgba(20, 54, 37, 0.15);
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 5px;
+            transition: all 0.2s ease;
+        }
+        .skill-badge:hover {
+            background-color: var(--mid-green);
+            color: var(--white);
+        }
+
+        /* Timeline for Experience */
+        .timeline-item {
+            border-left: 3px solid var(--light-green);
+            padding-left: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background-color: var(--white);
+            border: 3px solid var(--dark-green);
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: rgba(255,255,255,0.8);
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-code-square me-2"></i>MY PORTFOLIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">เกี่ยวกับผม</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">ทักษะและความสามารถ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">ประสบการณ์การทำงาน</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">ผลงานเด่น</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Intro Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <span class="badge mb-3 px-3 py-2" style="background-color: var(--light-green);">พร้อมเริ่มงานทันที</span>
+                    <h1 class="hero-title mb-3">สวัสดีครับ, ผม [ชื่อ-นามสกุลของคุณ]</h1>
+                    <p class="hero-subtitle fs-4 mb-4">นักพัฒนาเว็บเบราว์เซอร์ และผู้เชี่ยวชาญด้านการจัดการฐานข้อมูล (Full-Stack Developer / Data Analyst)</p>
+                    <p class="lead mb-4" style="color: #E2EFE7; opacity: 0.9;">มุ่งมั่นสร้างสรรค์เว็บแอปพลิเคชันที่มีประสิทธิภาพ ปลอดภัย และตอบโจทย์การใช้งานขององค์กร ด้วยประสบการณ์การออกแบบระบบฐานข้อมูลที่สอดรับกับเวิร์กโฟลว์ทางธุรกิจ</p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#contact" class="btn btn-custom-light rounded-pill">ติดต่อร่วมงาน</a>
+                        <a href="#projects" class="btn btn-custom-outline rounded-pill">ดูผลงานของผม</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <div class="profile-img-container">
+                        <!-- ตัวอย่างภาพรูปวงกลม สามารถเปลี่ยน src เป็นรูปของคุณได้ -->
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80" alt="Profile" class="img-fluid rounded-circle shadow" style="width: 280px; height: 280px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-5 my-4">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title">เกี่ยวกับตัวเอง (About Me)</h2>
+                    <p class="lead">"เปลี่ยนโจทย์ทางธุรกิจและเวิร์กโฟลว์ ให้เป็นระบบดิจิทัลที่ทำงานได้อย่างไร้รอยต่อ"</p>
+                    <p>ผมเป็นคนที่ชื่นชอบการแก้ไขปัญหาทางเทคโนโลยี มุ่งเน้นการเขียนโค้ดที่สะอาด (Clean Code) ปลอดภัย และจัดการฐานข้อมูลอย่างเป็นระบบ มีความเชี่ยวชาญในการออกแบบสถาปัตยกรรมฐานข้อมูลที่มีความสัมพันธ์ซับซ้อน (Relational Database) เพื่อรองรับข้อมูลขนาดใหญ่และการประมวลผลที่รวดเร็ว</p>
+                    <p>พร้อมที่จะนำทักษะด้านการพัฒนาซอฟต์แวร์และการคิดวิเคราะห์เชิงระบบมาร่วมขับเคลื่อนและพัฒนาโครงการต่างๆ ขององค์กรให้ก้าวหน้าอย่างยั่งยืน</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card custom-card p-4">
+                        <h4 class="mb-4 text-success" style="color: var(--dark-green) !important;"><i class="bi bi-person-vcard me-2"></i>ข้อมูลส่วนตัวย่อ</h4>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <strong>ตำแหน่งที่เปิดรับ:</strong> <p class="text-muted">Full-Stack Web Developer / IT Specialist</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>การศึกษา:</strong> <p class="text-muted">ปริญญาตรี สาขาวิทยาการคอมพิวเตอร์ / เทคโนโลยีสารสนเทศ</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>สถานที่ทำงานที่สะดวก:</strong> <p class="text-muted">กรุงเทพฯ / Workจากทุกที่ (Remote)</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>ภาษา:</strong> <p class="text-muted">ไทย (Native), อังกฤษ (Professional)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 style="background-color: #EBF2EE;"">
+        <div class="container">
+            <h2 class="section-title">ทักษะและความสามารถ (Skills)</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card custom-card h-100 p-4">
+                        <div class="icon-box"><i class="bi bi-laptop"></i></div>
+                        <h5>Front-End Development</h5>
+                        <p class="text-muted small">ออกแบบและพัฒนาหน้าตาเว็บไซต์ที่เป็นมิตรกับผู้ใช้งาน รองรับทุกหน้าจอ (Responsive Design)</p>
+                        <div class="mt-2">
+                            <span class="skill-badge">HTML5 / CSS3</span>
+                            <span class="skill-badge">Bootstrap 5</span>
+                            <span class="skill-badge">JavaScript (ES6)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card custom-card h-100 p-4">
+                        <div class="icon-box"><i class="bi bi-database"></i></div>
+                        <h5>Back-End & Database</h5>
+                        <p class="text-muted small">พัฒนาระบบประมวลผลหลังบ้านที่มีประสิทธิภาพ เสถียร และคำนึงถึงความปลอดภัยของข้อมูลเป็นหลัก</p>
+                        <div class="mt-2">
+                            <span class="skill-badge">PHP (PDO)</span>
+                            <span class="skill-badge">MySQL / MariaDB</span>
+                            <span class="skill-badge">Relational Database Design</span>
+                            <span class="skill-badge">SQL Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card custom-card h-100 p-4">
+                        <div class="icon-box"><i class="bi bi-shield-check"></i></div>
+                        <h5>Tools & Cyber Security</h5>
+                        <p class="text-muted small">ประยุกต์ใช้เครื่องมือเพื่อเพิ่มความเร็วในการทำงานและตระหนักรู้ด้านความปลอดภัยทางไซเบอร์</p>
+                        <div class="mt-2">
+                            <span class="skill-badge">Git / GitHub</span>
+                            <span class="skill-badge">Web Application Security</span>
+                            <span class="skill-badge">MS Excel (Advanced / Power Pivot)</span>
+                            <span class="skill-badge">XAMPP / Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience / Timeline Section -->
+    <section id="experience" class="py-5 my-4">
+        <div class="container">
+            <h2 class="section-title">ประสบการณ์และการทำงาน (Experience)</h2>
+            <div class="row">
+                <div class="col-lg-9 mx-auto">
+                    
+                    <div class="timeline-item mb-4 pb-3">
+                        <span class="text-muted d-block mb-1"><i class="bi bi-calendar3 me-2"></i>2024 - ปัจจุบัน</span>
+                        <h4 class="fw-bold" style="color: var(--dark-green);">Full-Stack Web Developer (Freelance / Project-based)</h4>
+                        <p class="text-success fw-medium mb-2">อิสระ / พัฒนาระบบให้องค์กร</p>
+                        <ul>
+                            <li>ออกแบบและพัฒนาระบบฐานข้อมูลเก็บข้อมูลบุคคลและพัสดุครุภัณฑ์คอมพิวเตอร์ ช่วยลดความซ้ำซ้อนของข้อมูลและเพิ่มความเร็วในการค้นหา 40%</li>
+                            <li>ใช้ภาษา PHP (PDO) ร่วมกับฐานข้อมูล MySQL และตกแต่งหน้าจอด้วย Bootstrap 5 มุ่งเน้นการป้องกัน SQL Injection และ XSS Protection</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item mb-4 pb-3">
+                        <span class="text-muted d-block mb-1"><i class="bi bi-calendar3 me-2"></i>2022 - 2024</span>
+                        <h4 class="fw-bold" style="color: var(--dark-green);">IT Specialist & Data Coordinator</h4>
+                        <p class="text-success fw-medium mb-2">บริษัท เทคโนโลยี ซอฟต์แวร์ จำกัด</p>
+                        <ul>
+                            <li>บริหารจัดการและออกแบบรายงานข้อมูลสรุปผู้เข้ารับการอบรมผ่านการประยุกต์ใช้ Microsoft Excel ขั้นสูง (Data Modeling และ Power Pivot)</li>
+                            <li>ดูแลระบบเครือข่ายคอมพิวเตอร์เบื้องต้นภายในหน่วยงาน และให้คำแนะนำทางเทคนิคแก่เจ้าหน้าที่ในทีม</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-5 style="background-color: #EBF2EE;"">
+        <div class="container">
+            <h2 class="section-title">ผลงานที่โดดเด่น (Featured Projects)</h2>
+            <div class="row g-4">
+                
+                <div class="col-md-6">
+                    <div class="card custom-card overflow-hidden h-100">
+                        <div class="p-4">
+                            <span class="text-uppercase text-muted small fw-bold">Web Application</span>
+                            <h4 class="card-title my-2 fw-bold" style="color: var(--dark-green);">ระบบบริหารจัดการบุคคลและพัสดุครุภัณฑ์คอมพิวเตอร์</h4>
+                            <p class="card-text text-muted">ระบบเว็บเพจที่เชื่อมต่อฐานข้อมูล MySQL แบบสัมพันธ์ พัฒนาขึ้นเพื่อช่วยลงทะเบียน ค้นหา และติดตามสถานะอุปกรณ์คอมพิวเตอร์ประจำตัวของบุคลากรภายในหน่วยงานได้อย่างเรียลไทม์</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary">PHP (PDO)</span>
+                                <span class="badge bg-secondary">MySQL</span>
+                                <span class="badge bg-secondary">Bootstrap 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card custom-card overflow-hidden h-100">
+                        <div class="p-4">
+                            <span class="text-uppercase text-muted small fw-bold">Data & Dashboard</span>
+                            <h4 class="card-title my-2 fw-bold" style="color: var(--dark-green);">ระบบวิเคราะห์และติดตามสถานะการฝึกอบรมดิจิทัล</h4>
+                            <p class="card-text text-muted">การนำเข้าไฟล์ข้อมูลใบรับรอง (Certificates) ของเจ้าหน้าที่ นำมาประมวลผล จัดโครงสร้างตารางข้อมูลเชื่อมโยงกัน และสร้างเป็น Dashboard รายงานผลความคืบหน้าแบ่งตามแผนก เพื่อส่งรายงานให้ผู้บริหารอย่างแม่นยำ</p>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary">Excel Data Modeling</span>
+                                <span class="badge bg-secondary">Power Pivot</span>
+                                <span class="badge bg-secondary">Data Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 my-4">
+        <div class="container">
+            <h2 class="section-title text-center mx-auto">ช่องทางการติดต่อ (Contact Me)</h2>
+            <p class="text-center text-muted mb-5">หากคุณกำลังมองหานักพัฒนาเว็บหรือผู้เชี่ยวชาญไอทีร่วมทีม ยินดีส่งเอกสารสมัครงาน (Resume/CV) เพิ่มเติมให้พิจารณาครับ</p>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="icon-box mx-auto"><i class="bi bi-envelope-fill"></i></div>
+                        <h6>อีเมลของคุณ</h6>
+                        <p class="text-muted">your.email@example.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="icon-box mx-auto"><i class="bi bi-telephone-fill"></i></div>
+                        <h6>เบอร์โทรศัพท์</h6>
+                        <p class="text-muted">08X-XXX-XXXX</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card custom-card p-4 text-center h-100">
+                        <div class="icon-box mx-auto"><i class="bi bi-github"></i></div>
+                        <h6>GitHub / Portfolio</h6>
+                        <p class="text-muted">github.com/yourusername</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-2">&copy; 2026 Developer Portfolio. All Rights Reserved.</p>
+            <p class="small text-muted-white" style="opacity: 0.6;">Designed with Bootstrap 5 (Deep Green & Light Green Theme)</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
